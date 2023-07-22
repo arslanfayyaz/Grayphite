@@ -221,6 +221,7 @@ class StudentView(APIView):
         return Response(serializer.errors)
 
     def get_student(self, pk):
+
         try:
             return Student.objects.get(pk=pk)
         except Student.DoesNotExist:
@@ -228,6 +229,7 @@ class StudentView(APIView):
 
     def delete(self, request, pk, format=None):
         student = self.get_student(pk)
+
         if not student:
             return Response({'error': 'Student not found'}, status=status.HTTP_404_NOT_FOUND)
 
