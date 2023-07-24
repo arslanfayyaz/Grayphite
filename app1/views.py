@@ -3,9 +3,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import University, Teacher, Song, Student
 from .serializers import UniversitySerializer, TeacherSerializer, SongSerializer, StudentSerializer
-from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser, DjangoModelPermissions
+from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from django_filters.rest_framework import DjangoFilterBackend
 
 
 class UniversityView(APIView):
@@ -28,6 +27,7 @@ class UniversityView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk, format=None):
@@ -37,6 +37,7 @@ class UniversityView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response({'msg': 'complete data updated'})
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self, request, pk, format=None):
@@ -46,6 +47,7 @@ class UniversityView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response({'msg': 'partial data updated'})
+
         return Response(serializer.errors)
 
     def get_university(self, pk):
@@ -83,6 +85,7 @@ class TeacherView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk, format=None):
@@ -92,6 +95,7 @@ class TeacherView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response({'msg': 'complete data updated'})
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self, request, pk, format=None):
@@ -101,11 +105,13 @@ class TeacherView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response({'msg': 'partial data updated'})
+
         return Response(serializer.errors)
 
     def get_teacher(self, pk):
         try:
             return Teacher.objects.get(pk=pk)
+
         except Teacher.DoesNotExist:
             return None
 
@@ -138,6 +144,7 @@ class SongView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk, format=None):
@@ -147,6 +154,7 @@ class SongView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response({'msg': 'complete data updated'})
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self, request, pk, format=None):
@@ -156,6 +164,7 @@ class SongView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response({'msg': 'partial data updated'})
+
         return Response(serializer.errors)
 
     def get_song(self, pk):
@@ -200,6 +209,7 @@ class StudentView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk, format=None):
@@ -209,6 +219,7 @@ class StudentView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response({'msg': 'complete data updated'})
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self, request, pk, format=None):
@@ -218,6 +229,7 @@ class StudentView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response({'msg': 'partial data updated'})
+
         return Response(serializer.errors)
 
     def get_student(self, pk):
